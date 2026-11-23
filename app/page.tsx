@@ -1,10 +1,185 @@
-import Image from 'next/image';import Link from 'next/link';import {ArrowUpRight,ArrowDown,ShieldCheck,Leaf,MoveRight,Sparkles,Check,Star,BriefcaseBusiness} from 'lucide-react';
-import {services} from '../lib/data';import ServiceIcon from '../components/ServiceIcon';import Reveal from '../components/Reveal';import BookingForm from '../components/BookingForm';import HowItWorks from '../components/HowItWorks';
-export default function Home(){return <main><section className="hero"><div className="hero-image"/><div className="hero-wash"/><div className="hero-orb orb-one"/><div className="hero-orb orb-two"/><div className="hero-content"><Reveal><span className="hero-kicker"><span className="live-dot"/> FRESH SPACES. PEACEFUL LIVING.</span><h1>Life’s better<br/>without the<br/><em>uninvited.</em></h1><p>Expert pest control, a thoughtful approach, and room to breathe. We make it easier to feel truly at home.</p><div className="hero-buttons"><Link href="/#booking" className="btn btn-primary">Book a visit <ArrowUpRight size={19}/></Link><Link href="/#services" className="btn btn-outline">Explore services <ArrowDown size={18}/></Link></div></Reveal></div><div className="hero-side-note">BETTER SPACES START HERE <span>✳</span></div><div className="hero-bottom"><div className="hero-scroll"><span className="scroll-line"/> SCROLL TO EXPLORE</div><div className="hero-trust"><ShieldCheck size={20}/><span>Tailored pest solutions<br/><b>For homes & businesses</b></span></div></div></section>
-<section className="intro-strip"><div className="strip-inner"><span>GOOD FOR YOUR SPACE</span><div className="strip-divider"/><strong>Thoughtful treatment.</strong><div className="strip-divider"/><strong>Lasting peace of mind.</strong><div className="strip-divider"/><span>✳ ECO CLEAN</span></div></section>
-<section className="services-section section-pad" id="services"><div className="section-container"><Reveal className="section-heading"><div><div className="eyebrow">OUR SERVICES <span>✳</span></div><h2>Every space deserves care.<br/><em>Our Services.</em></h2></div><p>Explore our professional cleaning, drainage, wastewater and pest-control services.</p></Reveal><div className="service-grid">{services.map((s,i)=><Reveal key={s.slug} delay={(i%4)*.06}><Link href={'/services/'+s.slug} className="service-card"><div className="service-card-top"><span className="service-number">0{i+1}</span><ArrowUpRight size={23}/></div><div className="service-illustration"><span><ServiceIcon slug={s.slug} size={76}/></span></div><div className="service-card-bottom"><h3>{s.name}</h3><p>{s.short}</p></div></Link></Reveal>)}</div></div></section>
-<HowItWorks/>
-<section className="about-section section-pad" id="about"><div className="section-container about-grid"><Reveal><div className="about-image"><Image src="/assets/hero-pest-control.png" alt="Eco Clean professional inspecting a modern living room" fill sizes="(max-width: 900px) 100vw, 50vw" style={{objectFit:'cover',objectPosition:'75% center'}}/><div className="image-tag"><Leaf size={20}/> A fresher way forward</div></div></Reveal><Reveal className="about-copy"><div className="eyebrow">A LITTLE ABOUT US <span>✳</span></div><h2>A clean space.<br/>A <em>clear mind.</em></h2><p>Eco Clean is built around a simple belief: the spaces we live and work in should feel comfortable, cared for, and protected.</p><p>We approach every pest issue with curiosity first, using careful inspection, targeted treatment plans, and straightforward communication.</p><div className="about-points"><span><Check size={18}/> Thoughtful inspections</span><span><Check size={18}/> Targeted solutions</span><span><Check size={18}/> Practical prevention advice</span></div><Link href="/#booking" className="text-arrow">Let’s talk about your space <MoveRight size={21}/></Link></Reveal></div></section>
-<section className="reviews-section section-pad" id="reviews"><div className="section-container"><Reveal className="section-heading"><div><div className="eyebrow">PEACE OF MIND <span>✳</span></div><h2>A little more comfort.<br/><em>A lot less worry.</em></h2></div><p>What a better pest-control experience should feel like.</p></Reveal><div className="review-grid">{[{icon:'✦',title:'Clear communication',text:'Understand the issue, the options, and the next steps — without the confusing jargon.'},{icon:'✳',title:'Care for your space',text:'Every property is different. Your treatment plan should reflect that.'},{icon:'☼',title:'Support beyond the visit',text:'Simple aftercare guidance and practical tips to help prevent pest activity.'}].map((r,i)=><Reveal delay={i*.08} key={r.title}><article className="review-card"><span className="review-star">{r.icon}</span><div className="review-stars" aria-label="Eco Clean value">✳ ✳ ✳ ✳ ✳</div><h3>{r.title}</h3><p>{r.text}</p><span className="review-meta">WHY ECO CLEAN · 0{i+1}</span></article></Reveal>)}</div><p className="review-disclaimer">These cards describe our service approach and are not customer testimonials. Add verified reviews when available.</p></div></section>
-<section className="career-teaser"><div className="section-container career-teaser-grid"><div><span className="eyebrow light">GROW WITH ECO CLEAN ✳</span><h2>Good people.<br/><em>Great purpose.</em></h2><p>Build a cleaner, healthier future alongside a team that cares about the details.</p></div><Link href="/careers" className="round-link" aria-label="Explore Eco Clean careers"><ArrowUpRight size={34}/></Link></div><div className="career-decoration">CAREERS ✳ CAREERS ✳ CAREERS</div></section>
-<section className="booking-section section-pad" id="booking"><div className="section-container booking-grid"><Reveal className="booking-intro"><div className="eyebrow">READY WHEN YOU ARE <span>✳</span></div><h2>Your space<br/>deserves a<br/><em>fresh start.</em></h2><p>One small step toward a home or workplace that feels better every day.</p><div className="booking-badges"><span><ShieldCheck size={17}/> Site-specific approach</span><span><Sparkles size={17}/> Clear next steps</span></div></Reveal><Reveal><BookingForm/></Reveal></div></section></main>}
+import type { Metadata } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowDown, ArrowUpRight, Check, MoveRight, ShieldCheck, Sparkles } from 'lucide-react';
+import BookingForm from '../components/BookingForm';
+import HowItWorks from '../components/HowItWorks';
+import Reveal from '../components/Reveal';
+import ServiceIcon from '../components/ServiceIcon';
+import { business } from '../lib/business';
+import { services } from '../lib/data';
+
+export const metadata: Metadata = {
+  title: { absolute: 'Cleaning & Maintenance Services in UAE | Eco Clean' },
+  description: 'Eco Clean provides drain jetting, tank cleaning, wastewater tanker, AC duct cleaning, grease trap cleaning and pest control services across the UAE.',
+  alternates: { canonical: business.url },
+  robots: { index: true, follow: true },
+};
+
+const organizationId = new URL('#organization', business.url).href;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': organizationId,
+      name: business.name,
+      url: business.url,
+      telephone: business.phone,
+      email: business.email,
+      sameAs: [business.instagram, business.facebook],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': new URL('#website', business.url).href,
+      name: business.name,
+      url: business.url,
+      publisher: { '@id': organizationId },
+    },
+  ],
+};
+
+const benefits = [
+  {
+    icon: '✦',
+    title: 'Clear Communication',
+    description: 'We take the time to understand your requirements and explain the recommended service approach.',
+  },
+  {
+    icon: '✳',
+    title: 'Care for Your Space',
+    description: 'From drainage systems to ventilation and kitchen facilities, our services focus on the areas that need attention.',
+  },
+  {
+    icon: '☼',
+    title: 'Practical Maintenance Support',
+    description: 'Our service approach considers both immediate cleaning needs and ongoing property maintenance.',
+  },
+];
+
+export default function Home() {
+  return (
+    <main>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }} />
+      <section className="hero">
+        <div className="hero-image" aria-hidden="true" />
+        <div className="hero-wash" />
+        <div className="hero-orb orb-one" />
+        <div className="hero-orb orb-two" />
+        <div className="hero-content">
+          <Reveal>
+            <span className="hero-kicker"><span className="live-dot" /> ECO CLEAN UAE</span>
+            <h1>Professional Cleaning &amp; Maintenance Services <em>in the UAE</em></h1>
+            <p>From drain line jetting and tank cleaning to AC duct cleaning and pest control, Eco Clean provides practical cleaning and maintenance solutions for residential and commercial properties across the UAE.</p>
+            <div className="hero-buttons">
+              <Link href="#booking" className="btn btn-primary">Book a Visit <ArrowUpRight size={19} /></Link>
+              <Link href="#services" className="btn btn-outline">Explore Services <ArrowDown size={18} /></Link>
+            </div>
+          </Reveal>
+        </div>
+        <div className="hero-bottom">
+          <div className="hero-scroll"><span className="scroll-line" /> SCROLL TO EXPLORE</div>
+          <div className="hero-trust"><ShieldCheck size={20} /><span>Cleaning &amp; maintenance<br /><b>For homes &amp; businesses</b></span></div>
+        </div>
+      </section>
+
+      <section className="intro-strip" aria-label="Service categories">
+        <div className="strip-inner">
+          <span>ECO CLEAN UAE</span><div className="strip-divider" />
+          <strong>Cleaning &amp; maintenance</strong><div className="strip-divider" />
+          <strong>Wastewater management</strong><div className="strip-divider" />
+          <span>Pest control</span>
+        </div>
+      </section>
+
+      <section className="services-section section-pad" id="services">
+        <div className="section-container">
+          <Reveal className="section-heading">
+            <h2>Every Space Deserves Care.<br /><em>Our Services.</em></h2>
+            <p>Explore our professional cleaning, drainage, wastewater management and pest control services for homes, businesses and industrial facilities across the UAE.</p>
+          </Reveal>
+          <div className="service-grid">
+            {services.map((service, index) => (
+              <Reveal key={service.slug} delay={(index % 4) * .06}>
+                <Link href={'/services/' + service.slug} className="service-card">
+                  <div className="service-card-top"><ArrowUpRight size={23} /></div>
+                  <div className="service-illustration" aria-hidden="true"><span><ServiceIcon slug={service.slug} size={76} /></span></div>
+                  <div className="service-card-bottom"><h3>{service.name}</h3><p>{service.short}</p></div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <HowItWorks />
+
+      <section className="about-section section-pad" id="about">
+        <div className="section-container about-grid">
+          <Reveal>
+            <div className="about-image">
+              <Image src="/assets/hero-pest-control.png" alt="Eco Clean technician inspecting a living room" fill sizes="(max-width: 900px) 100vw, 50vw" style={{ objectFit: 'cover', objectPosition: '75% center' }} />
+            </div>
+          </Reveal>
+          <Reveal className="about-copy">
+            <h2>A Clean Space.<br /><em>A Better Environment.</em></h2>
+            <p id="about-eco-clean">Eco Clean provides professional cleaning and maintenance services for residential, commercial and industrial properties across the UAE. Our services cover drainage systems, water and wastewater tanks, ventilation systems, commercial kitchens and pest-related concerns.</p>
+            <p>We focus on understanding each property’s requirements and recommending practical solutions that support cleanliness, hygiene and ongoing maintenance.</p>
+            <div className="about-points">
+              <span><Check size={18} /> Property-focused cleaning solutions</span>
+              <span><Check size={18} /> Residential and commercial services</span>
+              <span><Check size={18} /> Practical maintenance support</span>
+            </div>
+            <Link href="#about-eco-clean" className="text-arrow">Learn More About Eco Clean <MoveRight size={21} /></Link>
+          </Reveal>
+        </div>
+      </section>
+
+      <section className="reviews-section section-pad" id="reviews">
+        <div className="section-container">
+          <Reveal className="section-heading">
+            <h2>More Care for Your Property.<br /><em>Less Worry.</em></h2>
+            <p>Keeping your property clean and well-maintained should be straightforward. Eco Clean offers a range of cleaning and maintenance services that address the needs of homes, commercial kitchens, workplaces and industrial facilities.</p>
+          </Reveal>
+          <div className="review-grid">
+            {benefits.map((benefit, index) => (
+              <Reveal delay={index * .08} key={benefit.title}>
+                <article className="review-card">
+                  <span className="review-star" aria-hidden="true">{benefit.icon}</span>
+                  <h3>{benefit.title}</h3>
+                  <p>{benefit.description}</p>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="career-teaser">
+        <div className="section-container career-teaser-grid">
+          <div>
+            <span className="eyebrow light">GROW WITH ECO CLEAN ✳</span>
+            <h2>Good people.<br /><em>Great purpose.</em></h2>
+            <p>Build a cleaner, healthier future alongside a team that cares about the details.</p>
+          </div>
+          <Link href="/careers" className="round-link" aria-label="Explore Eco Clean careers"><ArrowUpRight size={34} /></Link>
+        </div>
+        <div className="career-decoration" aria-hidden="true">CAREERS ✳ CAREERS ✳ CAREERS</div>
+      </section>
+
+      <section className="booking-section section-pad" id="booking">
+        <div className="section-container booking-grid">
+          <Reveal className="booking-intro">
+            <h2>Your Property Deserves <em>Professional Care.</em></h2>
+            <p>Need drain line cleaning, wastewater removal, AC duct cleaning or pest control services in the UAE? Tell us what your property needs, and our team can help you explore the appropriate service.</p>
+            <div className="booking-badges">
+              <span><ShieldCheck size={17} /> Site-specific approach</span>
+              <span><Sparkles size={17} /> Clear next steps</span>
+            </div>
+          </Reveal>
+          <Reveal><BookingForm /></Reveal>
+        </div>
+      </section>
+    </main>
+  );
+}

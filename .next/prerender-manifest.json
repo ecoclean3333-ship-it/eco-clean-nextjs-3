@@ -1,11 +1,1 @@
-{
-  "version": 4,
-  "routes": {},
-  "dynamicRoutes": {},
-  "notFoundRoutes": [],
-  "preview": {
-    "previewModeId": "9fbfa4cc3057f90d8bf38c0a0cd9c58f",
-    "previewModeSigningKey": "316a1d633b82bc585f3c0ccca0a5b76ffa90d0171e965445603abbf656af989a",
-    "previewModeEncryptionKey": "f3a2fd4272242b68f3567f8adb51f38ad7cbf76ffef0854ff076bf3601a15c8d"
-  }
-}
+{"version":4,"routes":{"/services/drain-line-jetting":{},"/services/tank-cleaning":{},"/services/sump-pit-cleaning":{},"/services/waste-water-tanker-abu-dhabi":{},"/services/ac-duct-cleaning":{},"/services/grease-trap-cleaning":{},"/services/kitchen-hood-duct-cleaning":{},"/services/pest-control-service":{}},"dynamicRoutes":{"/services/[slug]":{"dataRoute":null,"dataRouteRegex":null,"fallback":null,"fallbackRevalidate":false,"fallbackSourceRoute":"/services/[slug]","routeRegex":"^\\/services\\/([^/]+?)(?:\\/)?$","allowHeader":[]}},"notFoundRoutes":[],"preview":{"previewModeId":"67343c1154c36c5359eed6b322ce3a56","previewModeSigningKey":"2b56b33984a9a139e8d8da0be46df8d557457fcbfd04917288bc1bfb917f789b","previewModeEncryptionKey":"3aa7239ecea370ba6099f182ef0d80604ec4fd43f0621701fa152c6e0dcc1640"}}
