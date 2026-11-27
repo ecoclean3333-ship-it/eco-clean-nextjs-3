@@ -1,0 +1,79 @@
+.heroTitle {
+  font-size: clamp(2.8rem, 5.8vw, 7rem);
+  text-wrap: balance;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.heroActions a:last-child {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.overview {
+  margin-top: clamp(2rem, 6vw, 4rem);
+}
+
+.overview p, .details p {
+  max-width: 75ch;
+  line-height: 1.7;
+}
+
+.details section + section {
+  margin-top: clamp(2.5rem, 6vw, 5rem);
+}
+
+.details h2 {
+  font-size: clamp(2rem, 4vw, 4rem);
+  margin-bottom: 1rem;
+  max-width: 25ch;
+  text-wrap: balance;
+}
+
+.details h3 {
+  font-size: clamp(1.25rem, 2.5vw, 1.65rem);
+  letter-spacing: -0.035em;
+  margin-bottom: 0.65rem;
+}
+
+.topics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.topics > div, .faq details {
+  padding: 1.25rem;
+  background: var(--paper);
+  border-radius: 14px;
+}
+
+.topics p, .faq p {
+  margin-bottom: 0;
+}
+
+.faq details + details {
+  margin-top: 0.75rem;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq p {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 780px) {
+  .topics {
+    grid-template-columns: 1fr;
+  }
+}

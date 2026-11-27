@@ -1,0 +1,94 @@
+.page h1 {
+  font-size: clamp(2.75rem, 5.7vw, 6.75rem);
+  text-wrap: balance;
+}
+
+.page h3 {
+  font-size: clamp(1.35rem, 2.5vw, 2rem);
+  letter-spacing: -0.035em;
+  margin-bottom: 0.65rem;
+}
+
+.page h4 {
+  margin: 1.25rem 0 0.4rem;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem 1.5rem;
+}
+
+.actions a:not([class]) {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
+  background: var(--paper);
+}
+
+.list svg {
+  flex-shrink: 0;
+  color: var(--green);
+}
+
+.soft {
+  background: var(--paper);
+}
+
+.supportingImage {
+  width: 100%;
+  height: auto;
+  align-self: center;
+  border-radius: 24px;
+}
+
+.card, .faq details {
+  background: white;
+  border: 1px solid #dce4d5;
+  border-radius: 20px;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.steps {
+  margin-bottom: 0;
+  padding-left: 1.5rem;
+}
+
+.steps li {
+  padding-left: 0.35rem;
+}
+
+.card p:last-child, .faq details p:last-child {
+  margin-bottom: 0;
+}
+
+.steps li + li, .faq details + details {
+  margin-top: 0.8rem;
+}
+
+.faq details {
+  padding-block: 1rem;
+}
+
+.faq summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.faq details p {
+  margin-top: 0.75rem;
+}

@@ -5,7 +5,17 @@ import { ArrowUpRight, CheckCircle2 } from 'lucide-react';
 import { business } from '../lib/business';
 import { services } from '../lib/data';
 
-export default function BookingForm() {
+type BookingFormProps = {
+  initialService?: string;
+  instructions?: string;
+  submitLabel?: string;
+};
+
+export default function BookingForm({
+  initialService = '',
+  instructions = 'Share your service requirements and location. Our team will review your enquiry and contact you about the next steps. Your email app will open to send the request.',
+  submitLabel = 'Request a Service',
+}: BookingFormProps) {
   const [prepared, setPrepared] = useState(false);
 
   function prepareEnquiry(event: FormEvent<HTMLFormElement>) {
@@ -27,7 +37,7 @@ export default function BookingForm() {
   return (
     <div className="booking-card">
       <h3>Let’s Get Your Space <em>Taken Care Of.</em></h3>
-      <p>Share your service requirements and location. Our team will review your enquiry and contact you about the next steps. Your email app will open to send the request.</p>
+      <p>{instructions}</p>
       <form onSubmit={prepareEnquiry}>
         <div className="field-row">
           <label>Full Name<input name="name" autoComplete="name" required /></label>
@@ -36,7 +46,7 @@ export default function BookingForm() {
         <div className="field-row">
           <label>
             Service Required
-            <select name="service" required defaultValue="">
+            <select name="service" required defaultValue={initialService}>
               <option value="" disabled>Choose a service</option>
               {services.map(service => <option key={service.slug}>{service.name}</option>)}
             </select>
@@ -49,7 +59,7 @@ export default function BookingForm() {
           </label>
         </div>
         <label>Your Message<textarea name="message" rows={3} placeholder="Include your location and any service details." /></label>
-        <button type="submit" className="btn btn-primary form-submit">Request a Service <ArrowUpRight size={18} /></button>
+        <button type="submit" className="btn btn-primary form-submit">{submitLabel} <ArrowUpRight size={18} /></button>
         <p role="status" className="form-notice" hidden={!prepared}><CheckCircle2 size={16} /> Send the prepared request from your email app.</p>
       </form>
     </div>
